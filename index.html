@@ -14,7 +14,6 @@
         .reveal { visibility: hidden; }
         .modal-active { overflow: hidden; }
         
-        /* Spotlight Effect */
         .spotlight-card { position: relative; }
         .spotlight-card::before {
             content: "";
@@ -38,26 +37,25 @@
     <main class="pt-32">
         <section class="text-center px-4 mb-20 reveal">
             <h1 class="text-6xl md:text-8xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-emerald-400 uppercase italic leading-none">Power Design</h1>
-            <p class="text-gray-500 mt-4 uppercase tracking-[0.4em] text-[10px] font-bold italic font-black">Full Featured. Production Ready. [cite: 2026-01-04]</p>
+            <p class="text-gray-500 mt-4 uppercase tracking-[0.4em] text-[10px] font-bold italic font-black">Full Featured. Production Ready.</p>
         </section>
 
         <section class="px-6 max-w-6xl mx-auto pb-32">
-            <div id="project-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                </div>
+            <div id="project-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8"></div>
         </section>
 
         <section id="contatti" class="py-20 px-6 max-w-2xl mx-auto">
             <div class="glass p-12 rounded-[3rem] text-center reveal border-blue-500/20">
                 <i data-lucide="mail" class="w-12 h-12 text-blue-400 mx-auto mb-6"></i>
                 <h2 class="text-4xl font-black mb-6 uppercase italic leading-none text-blue-400">Pronto al brief?</h2>
-                <p class="text-gray-400 mb-8 font-light">Clicca sotto per inviare i dettagli del tuo progetto. [cite: 2026-01-04]</p>
+                <p class="text-gray-400 mb-8 font-light">Clicca sotto per inviare i dettagli del tuo progetto.</p>
                 <button onclick="openContactModal()" class="w-full bg-blue-600 text-white p-5 rounded-2xl font-black hover:bg-blue-500 transition-all uppercase shadow-2xl shadow-blue-500/20">Invia Progetto</button>
             </div>
         </section>
     </main>
 
     <footer class="py-10 text-center text-gray-700 text-[9px] tracking-[0.5em] uppercase font-bold">
-        &copy; 2026 Tech.Lab — Fully Featured [cite: 2026-01-04]
+        &copy; 2026 Tech.Lab — Fully Featured
     </footer>
 
     <div id="modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4">
@@ -70,10 +68,10 @@
 
     <script>
         const progetti = [
-            { id: 1, title: "Quantum Wallet", cat: "FINTECH", color: "text-blue-400", img: "foto1.jpg", desc: "Architettura di sicurezza avanzata per asset digitali [cite: 2026-01-04]." },
-            { id: 2, title: "Lux Fragrance", cat: "E-COMMERCE", color: "text-emerald-400", img: "foto2.png", desc: "Interfaccia immersiva per brand d'elite [cite: 2026-01-04]." },
-            { id: 3, title: "AI Neural Hub", cat: "TECH", color: "text-purple-400", img: "foto3.webp", desc: "Dashboard neurale per monitoraggio AI [cite: 2026-01-04]." },
-            { id: 4, title: "Smart Command", cat: "IOT", color: "text-orange-400", img: "foto4.jpg", desc: "Sistemi domotici di lusso [cite: 2026-01-04]." }
+            { id: 1, title: "Mente Potente", cat: "LIBRO", color: "text-blue-400", img: "Foto1.jpg", desc: "Verso il risveglio del potenziale." },
+            { id: 2, title: "Il Mondo dei Gatti", cat: "LIBRO", color: "text-emerald-400", img: "Foto2.jpg", desc: "Guida completa al comportamento felino." },
+            { id: 3, title: "Maialini Vietnamiti", cat: "LIBRO", color: "text-purple-400", img: "Foto3.jpg", desc: "Guida completa all'allevamento domestico." },
+            { id: 4, title: "Smart Command", cat: "IOT", color: "text-orange-400", img: "foto4.jpg", desc: "Sistemi domotici di lusso." }
         ];
 
         const grid = document.getElementById('project-grid');
@@ -100,7 +98,6 @@
             }
         }
 
-        // Apre il modale del progetto
         function openModal(id) {
             const p = progetti.find(item => item.id === id);
             document.getElementById('modal-content').innerHTML = `
@@ -117,11 +114,9 @@
             lucide.createIcons();
         }
 
-        // APRE IL MODALE CONTATTI (Email e Messaggio)
         function openContactModal() {
             document.getElementById('modal-content').innerHTML = `
                 <h2 class="text-4xl font-black mb-6 uppercase italic leading-none text-blue-400">Nuovo Progetto</h2>
-                <p class="text-gray-400 mb-8 font-light italic">Inserisci i tuoi dati per ricevere un preventivo Power. [cite: 2026-01-04]</p>
                 <div class="space-y-4 text-left">
                     <div>
                         <label class="text-[10px] font-black uppercase tracking-widest text-gray-500 ml-2">Tua Email</label>
