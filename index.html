@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech.Lab | Full Production Edition</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; background-color: #0f172a; overflow-x: hidden; }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
+        .reveal { visibility: hidden; }
+        .modal-active { overflow: hidden; }
+        
+        /* Spotlight Effect */
+        .spotlight-card { position: relative; }
+        .spotlight-card::before {
+            content: "";
+            position: absolute; inset: 0;
+            background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(59, 130, 246, 0.15), transparent 40%);
+            z-index: 3; pointer-events: none; opacity: 0; transition: opacity 0.5s;
+        }
+        .spotlight-card:hover::before { opacity: 1; }
+    </style>
+</head>
+<body class="text-white antialiased">
+
+    <nav class="fixed top-0 w-full z-50 px-6 py-4 flex justify-between items-center bg-[#0f172a]/80 backdrop-blur-xl border-b border-white/5">
+        <div class="flex items-center gap-2">
+            <div class="p-2 bg-blue-600 rounded-lg"><i data-lucide="cpu" class="w-5 h-5 text-white"></i></div>
+            <span class="font-bold text-xl tracking-tighter uppercase italic">Tech.Lab</span>
+        </div>
+        <button onclick="openContactModal()" class="bg-white text-black px-6 py-2 rounded-full text-[10px] font-black hover:bg-blue-400 hover:text-white transition-all uppercase tracking-widest shadow-lg">Lavoriamo Insieme</button>
+    </nav>
+
+    <main class="pt-32">
+        <section class="text-center px-4 mb-20 reveal">
+            <h1 class="text-6xl md:text-8xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-emerald-400 uppercase italic leading-none">Power Design</h1>
+            <p class="text-gray-500 mt-4 uppercase tracking-[0.4em] text-[10px] font-bold italic font-black">Full Featured. Production Ready. [cite: 2026-01-04]</p>
+        </section>
+
+        <section class="px-6 max-w-6xl mx-auto pb-32">
+            <div id="project-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                </div>
+        </section>
+
+        <section id="contatti" class="py-20 px-6 max-w-2xl mx-auto">
+            <div class="glass p-12 rounded-[3rem] text-center reveal border-blue-500/20">
+                <i data-lucide="mail" class="w-12 h-12 text-blue-400 mx-auto mb-6"></i>
+                <h2 class="text-4xl font-black mb-6 uppercase italic leading-none text-blue-400">Pronto al brief?</h2>
+                <p class="text-gray-400 mb-8 font-light">Clicca sotto per inviare i dettagli del tuo progetto. [cite: 2026-01-04]</p>
+                <button onclick="openContactModal()" class="w-full bg-blue-600 text-white p-5 rounded-2xl font-black hover:bg-blue-500 transition-all uppercase shadow-2xl shadow-blue-500/20">Invia Progetto</button>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-10 text-center text-gray-700 text-[9px] tracking-[0.5em] uppercase font-bold">
+        &copy; 2026 Tech.Lab — Fully Featured [cite: 2026-01-04]
+    </footer>
+
+    <div id="modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/98 backdrop-blur-2xl" onclick="closeModal()"></div>
+        <div class="glass max-w-3xl w-full rounded-[3rem] relative z-10 p-10 shadow-2xl overflow-hidden">
+            <button onclick="closeModal()" class="absolute top-6 right-6 p-2 hover:bg-white/10 rounded-full transition"><i data-lucide="x" class="w-8 h-8 text-white"></i></button>
+            <div id="modal-content"></div>
+        </div>
+    </div>
+
+    <script>
+        const progetti = [
+            { id: 1, title: "Quantum Wallet", cat: "FINTECH", color: "text-blue-400", img: "foto1.jpg", desc: "Architettura di sicurezza avanzata per asset digitali [cite: 2026-01-04]." },
+            { id: 2, title: "Lux Fragrance", cat: "E-COMMERCE", color: "text-emerald-400", img: "foto2.png", desc: "Interfaccia immersiva per brand d'elite [cite: 2026-01-04]." },
+            { id: 3, title: "AI Neural Hub", cat: "TECH", color: "text-purple-400", img: "foto3.webp", desc: "Dashboard neurale per monitoraggio AI [cite: 2026-01-04]." },
+            { id: 4, title: "Smart Command", cat: "IOT", color: "text-orange-400", img: "foto4.jpg", desc: "Sistemi domotici di lusso [cite: 2026-01-04]." }
+        ];
+
+        const grid = document.getElementById('project-grid');
+        progetti.forEach(p => {
+            grid.innerHTML += `
+                <div onclick="openModal(${p.id})" class="spotlight-card group relative overflow-hidden rounded-[2.5rem] glass reveal cursor-pointer transition-all duration-500">
+                    <img src="${p.img}" class="w-full h-[380px] object-cover opacity-20 group-hover:opacity-100 transition-all duration-1000">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-[#0f172a]/40 to-transparent z-10"></div>
+                    <div class="absolute bottom-0 p-10 z-20 w-full">
+                        <span class="${p.color} text-[9px] font-bold tracking-[0.4em] uppercase">${p.cat}</span>
+                        <h4 class="text-3xl font-black mt-1 uppercase italic leading-none mb-6 tracking-tighter">${p.title}</h4>
+                        <div class="inline-flex items-center gap-3 px-5 py-2.5 bg-white/10 rounded-full border border-white/10 group-hover:bg-blue-600 transition-all duration-300 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0">
+                            <span class="text-[10px] font-black uppercase tracking-widest">Esplora</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </div>
+                    </div>
+                </div>`;
+        });
+
+        document.getElementById('project-grid').onmousemove = e => {
+            for(const card of document.getElementsByClassName('spotlight-card')) {
+                const rect = card.getBoundingClientRect(), x = e.clientX - rect.left, y = e.clientY - rect.top;
+                card.style.setProperty("--mouse-x", `${x}px`); card.style.setProperty("--mouse-y", `${y}px`);
+            }
+        }
+
+        // Apre il modale del progetto
+        function openModal(id) {
+            const p = progetti.find(item => item.id === id);
+            document.getElementById('modal-content').innerHTML = `
+                <span class="${p.color} font-bold tracking-[0.3em] uppercase text-[10px]">${p.cat}</span>
+                <h2 class="text-4xl font-black mb-6 mt-2 uppercase italic leading-none">${p.title}</h2>
+                <div class="rounded-2xl overflow-hidden mb-8 shadow-2xl border border-white/5"><img src="${p.img}" class="w-full h-[280px] object-cover"></div>
+                <p class="text-gray-400 text-lg font-light mb-8">${p.desc}</p>
+                <div class="flex gap-4">
+                    <button class="bg-blue-600 text-white px-8 py-4 rounded-xl font-black uppercase text-[10px] tracking-widest hover:bg-blue-500 transition-all">Visita Sito</button>
+                    <button onclick="closeModal()" class="bg-white/5 border border-white/10 px-8 py-4 rounded-xl font-black uppercase text-[10px] tracking-widest hover:bg-white/10 transition-all">Chiudi</button>
+                </div>`;
+            document.getElementById('modal').classList.remove('hidden');
+            document.body.classList.add('modal-active');
+            lucide.createIcons();
+        }
+
+        // APRE IL MODALE CONTATTI (Email e Messaggio)
+        function openContactModal() {
+            document.getElementById('modal-content').innerHTML = `
+                <h2 class="text-4xl font-black mb-6 uppercase italic leading-none text-blue-400">Nuovo Progetto</h2>
+                <p class="text-gray-400 mb-8 font-light italic">Inserisci i tuoi dati per ricevere un preventivo Power. [cite: 2026-01-04]</p>
+                <div class="space-y-4 text-left">
+                    <div>
+                        <label class="text-[10px] font-black uppercase tracking-widest text-gray-500 ml-2">Tua Email</label>
+                        <input type="email" placeholder="nome@esempio.com" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl focus:outline-none focus:border-blue-500 transition-all text-white">
+                    </div>
+                    <div>
+                        <label class="text-[10px] font-black uppercase tracking-widest text-gray-500 ml-2">Messaggio</label>
+                        <textarea placeholder="Descrivi il tuo progetto..." rows="4" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl focus:outline-none focus:border-blue-500 transition-all text-white"></textarea>
+                    </div>
+                    <button class="w-full bg-blue-600 text-white p-5 rounded-2xl font-black uppercase text-xs tracking-[0.2em] hover:bg-blue-500 transition-all shadow-xl shadow-blue-500/20">Invia Richiesta</button>
+                </div>`;
+            document.getElementById('modal').classList.remove('hidden');
+            document.body.classList.add('modal-active');
+            lucide.createIcons();
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.add('hidden');
+            document.body.classList.remove('modal-active');
+        }
+
+        lucide.createIcons();
+        ScrollReveal().reveal('.reveal', { delay: 100, distance: '30px', origin: 'bottom', duration: 800 });
+    </script>
+</body>
+</html>
